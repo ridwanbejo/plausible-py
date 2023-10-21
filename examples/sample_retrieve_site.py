@@ -1,8 +1,13 @@
+import os
+
 from ..plausible import PlausibleAPI
 
+PLAUSIBLE_HOST = os.environ.get("PLAUSIBLE_HOST", "http://localhost:8000")
+PLAUSIBLE_TOKEN = os.environ.get("PLAUSIBLE_HOST")
+
 plausible_api = PlausibleAPI(
-    host="http://localhost:8000",
-    token="x8CuaFzz4cdwz6Pv0Onkv5w9tUZd0VfWMiuFZroEAHggYe0ppEhwp84O7Csg_AYn",
+    host=PLAUSIBLE_HOST,
+    token=PLAUSIBLE_TOKEN,
 )
 
 result = plausible_api.retrieve_site("tokopedia.com")
