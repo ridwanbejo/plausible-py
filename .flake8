@@ -1,0 +1,11 @@
+[flake8]
+extend-ignore = E122,E128,E211,E501
+exclude =
+    .git,
+    .gitignore,
+    .gitlab-ci.yaml,
+    __pycache__,
+    Dockerfile,
+    README.md,
+    requirements.txt
+max-complexity = 10
