@@ -20,9 +20,9 @@ class PlausibleAPI(object):
 
     REALTIME_VISITOR_URL = "/api/v1/stats/realtime/visitors?site_id={domain}"
 
-    def __init__(self, host, token):
+    def __init__(self, host, token, timeout=10):
         self.host = host
-
+        self.timeout = timeout
         self.headers = {
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json",
@@ -65,7 +65,10 @@ class PlausibleAPI(object):
         create_site_url = self.get_url("create-site")
 
         create_requests = requests.post(
-            create_site_url, data=json.dumps(payload), headers=self.headers
+            create_site_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = create_site_url
@@ -85,7 +88,9 @@ class PlausibleAPI(object):
         retrieve_site_url = self.get_url("retrieve-site")
 
         result = self.result
-        retrieve_requests = requests.get(retrieve_site_url, headers=self.headers)
+        retrieve_requests = requests.get(
+            retrieve_site_url, headers=self.headers, timeout=self.timeout
+        )
 
         result["url"] = retrieve_site_url
         result["status_code"] = retrieve_requests.status_code
@@ -106,7 +111,10 @@ class PlausibleAPI(object):
 
         result = self.result
         update_requests = requests.put(
-            update_site_url, data=json.dumps(payload), headers=self.headers
+            update_site_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = update_site_url
@@ -127,7 +135,9 @@ class PlausibleAPI(object):
         delete_site_url = self.get_url("delete-site")
 
         result = self.result
-        delete_requests = requests.delete(delete_site_url, headers=self.headers)
+        delete_requests = requests.delete(
+            delete_site_url, headers=self.headers, timeout=self.timeout
+        )
 
         result["message"] = "Site has been deleted"
         result["url"] = delete_site_url
@@ -162,7 +172,10 @@ class PlausibleAPI(object):
         create_site_goal_url = self.get_url("create-site-goal")
 
         create_requests = requests.put(
-            create_site_goal_url, data=json.dumps(payload), headers=self.headers
+            create_site_goal_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = create_site_goal_url
@@ -187,7 +200,10 @@ class PlausibleAPI(object):
 
         result = self.result
         delete_requests = requests.delete(
-            delete_site_goal_url, data=json.dumps(payload), headers=self.headers
+            delete_site_goal_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = delete_site_goal_url
@@ -213,7 +229,10 @@ class PlausibleAPI(object):
         create_site_shared_link_url = self.get_url("create-site-shared-link")
 
         create_requests = requests.put(
-            create_site_shared_link_url, data=json.dumps(payload), headers=self.headers
+            create_site_shared_link_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = create_site_shared_link_url
@@ -255,7 +274,10 @@ class PlausibleAPI(object):
         send_event_url = self.get_url("send-event")
 
         create_requests = requests.post(
-            send_event_url, data=json.dumps(payload), headers=self.headers
+            send_event_url,
+            data=json.dumps(payload),
+            headers=self.headers,
+            timeout=self.timeout,
         )
 
         result["url"] = send_event_url
@@ -276,7 +298,9 @@ class PlausibleAPI(object):
         realtime_visitors_url = self.get_url("realtime-visitors")
 
         result = self.result
-        retrieve_requests = requests.get(realtime_visitors_url, headers=self.headers)
+        retrieve_requests = requests.get(
+            realtime_visitors_url, headers=self.headers, timeout=self.timeout
+        )
 
         result["url"] = realtime_visitors_url
         result["status_code"] = retrieve_requests.status_code
