@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import json
+from typing import Any, Dict
 
 import requests
 
@@ -20,7 +21,7 @@ class PlausibleAPI(object):
 
     REALTIME_VISITOR_URL = "/api/v1/stats/realtime/visitors?site_id={domain}"
 
-    def __init__(self, host, token, timeout=10):
+    def __init__(self, host: str, token: str, timeout: int = 10) -> None:
         self.host = host
         self.timeout = timeout
         self.headers = {
@@ -30,12 +31,12 @@ class PlausibleAPI(object):
 
         self.result = dict(message="")
 
-    def build_url(self, url):
+    def build_url(self, url: str) -> str:
         required_url = self.host + url
 
         return required_url
 
-    def get_url(self, task):
+    def get_url(self, task: str) -> str:
         if task == "create-site":
             return self.build_url(self.CREATE_SITE_URL)
         elif task == "retrieve-site":
@@ -57,7 +58,7 @@ class PlausibleAPI(object):
         elif task == "realtime-visitors":
             return self.build_url(self.REALTIME_VISITOR_URL.format(domain=self.domain))
 
-    def create_site(self, domain, time_zone):
+    def create_site(self, domain: str, time_zone: str) -> Dict[Any, Any]:
         result = self.result
 
         payload = {"domain": domain, "timezone": time_zone}
@@ -83,7 +84,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def retrieve_site(self, domain):
+    def retrieve_site(self, domain: str) -> Dict[Any, Any]:
         self.domain = domain
         retrieve_site_url = self.get_url("retrieve-site")
 
@@ -103,7 +104,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def update_site(self, domain, new_domain):
+    def update_site(self, domain: str, new_domain: str) -> Dict[Any, Any]:
         self.domain = domain
         update_site_url = self.get_url("update-site")
 
@@ -130,7 +131,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def delete_site(self, domain):
+    def delete_site(self, domain: str) -> Dict[Any, Any]:
         self.domain = domain
         delete_site_url = self.get_url("delete-site")
 
@@ -153,7 +154,9 @@ class PlausibleAPI(object):
 
         return result
 
-    def create_site_goal(self, domain, goal_type, event_name="", page_path=""):
+    def create_site_goal(
+        self, domain: str, goal_type: str, event_name: str = "", page_path: str = ""
+    ) -> Dict[Any, Any]:
         result = self.result
 
         if goal_type == "event":
@@ -190,7 +193,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def delete_site_goal(self, goal_id, domain):
+    def delete_site_goal(self, goal_id: int, domain: str) -> Dict[Any, Any]:
         self.goal_id = goal_id
         delete_site_goal_url = self.get_url("delete-site-goal")
 
@@ -218,7 +221,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def create_site_shared_link(self, domain, name):
+    def create_site_shared_link(self, domain: str, name: str) -> Dict[Any, Any]:
         result = self.result
 
         payload = {
@@ -249,15 +252,15 @@ class PlausibleAPI(object):
 
     def send_event(
         self,
-        user_agent,
-        domain,
-        name,
-        url,
-        x_forwarded_for="",
-        props={},
-        currency="",
-        amount="",
-    ):
+        user_agent: str,
+        domain: str,
+        name: str,
+        url: str,
+        x_forwarded_for: str = "",
+        props: Dict[str, str] = {},
+        currency: str = "",
+        amount: str = "",
+    ) -> Dict[Any, Any]:
         result = self.result
 
         self.headers["User-Agent"] = user_agent
@@ -293,7 +296,7 @@ class PlausibleAPI(object):
 
         return result
 
-    def get_realtime_visitors(self, domain):
+    def get_realtime_visitors(self, domain: str) -> Dict[Any, Any]:
         self.domain = domain
         realtime_visitors_url = self.get_url("realtime-visitors")
 
