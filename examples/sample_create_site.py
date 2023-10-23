@@ -3,7 +3,7 @@ import os
 from ..plausible import PlausibleAPI
 
 PLAUSIBLE_HOST = os.environ.get("PLAUSIBLE_HOST", "http://localhost:8000")
-PLAUSIBLE_TOKEN = os.environ.get("PLAUSIBLE_HOST")
+PLAUSIBLE_TOKEN = os.environ.get("PLAUSIBLE_TOKEN")
 
 plausible_api = PlausibleAPI(
     host=PLAUSIBLE_HOST,
