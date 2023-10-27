@@ -24,7 +24,7 @@ jobs:
           pip install pytest pytest-cov ruff bandit
           pip install -r requirements.txt
       - name: Linting with Ruff
-        run: ruff --output-format=github check .
+        run: ruff check .
       - name: Check vulnerability with Bandit
         run: bandit -r .
       - name: Test with pytest and coverage
