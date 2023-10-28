@@ -22,6 +22,17 @@ class PlausibleAPI(object):
     REALTIME_VISITOR_URL = "/api/v1/stats/realtime/visitors?site_id={domain}"
 
     def __init__(self, host: str, token: str, timeout: int = 10) -> None:
+        """This is a constructor of PlausibleAPI class
+
+        :param str host: The hostname of Plausible API
+        :param str token: The token for interact with Plausible API
+        :param int timeout: The max timeout when calling Plausible API endpoints
+
+        :returns: Nothing returned
+
+        :rtype: None
+        """
+
         self.host = host
         self.timeout = timeout
         self.headers = {
@@ -32,6 +43,15 @@ class PlausibleAPI(object):
         self.result = dict(message="")
 
     def build_url(self, url: str) -> str:
+        """This is a method for generate specified URL for performing requests to specific endpoint
+
+        :param str url: URL of specific endpoint which defined in the PlausibleAPI class
+
+        :returns: The combination between Plausible API hostname and specific endpoint
+
+        :rtype: str
+        """
+
         required_url = self.host + url
 
         return required_url
