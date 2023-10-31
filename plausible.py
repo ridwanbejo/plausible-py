@@ -7,19 +7,19 @@ import requests
 
 
 class PlausibleAPI(object):
-    CREATE_SITE_URL = "/api/v1/sites"
-    RETRIEVE_SITE_URL = "/api/v1/sites/{domain}"
-    UPDATE_SITE_URL = "/api/v1/sites/{domain}"
-    DELETE_SITE_URL = "/api/v1/sites/{domain}"
+    _CREATE_SITE_URL = "/api/v1/sites"
+    _RETRIEVE_SITE_URL = "/api/v1/sites/{domain}"
+    _UPDATE_SITE_URL = "/api/v1/sites/{domain}"
+    _DELETE_SITE_URL = "/api/v1/sites/{domain}"
 
-    CREATE_SITE_SHARED_LINK_URL = "/api/v1/sites/shared-links"
+    _CREATE_SITE_SHARED_LINK_URL = "/api/v1/sites/shared-links"
 
-    CREATE_SITE_GOAL_URL = "/api/v1/sites/goals"
-    DELETE_SITE_GOAL_URL = "/api/v1/sites/goals/{goal_id}"
+    _CREATE_SITE_GOAL_URL = "/api/v1/sites/goals"
+    _DELETE_SITE_GOAL_URL = "/api/v1/sites/goals/{goal_id}"
 
-    SEND_EVENT_URL = "/api/event"
+    _SEND_EVENT_URL = "/api/event"
 
-    REALTIME_VISITOR_URL = "/api/v1/stats/realtime/visitors?site_id={domain}"
+    _REALTIME_VISITOR_URL = "/api/v1/stats/realtime/visitors?site_id={domain}"
 
     def __init__(self, host: str, token: str, timeout: int = 10) -> None:
         """This is a constructor of PlausibleAPI class
@@ -67,25 +67,25 @@ class PlausibleAPI(object):
         """
 
         if task == "create-site":
-            return self.build_url(self.CREATE_SITE_URL)
+            return self.build_url(self._CREATE_SITE_URL)
         elif task == "retrieve-site":
-            return self.build_url(self.RETRIEVE_SITE_URL.format(domain=self.domain))
+            return self.build_url(self._RETRIEVE_SITE_URL.format(domain=self.domain))
         elif task == "update-site":
-            return self.build_url(self.UPDATE_SITE_URL.format(domain=self.domain))
+            return self.build_url(self._UPDATE_SITE_URL.format(domain=self.domain))
         elif task == "delete-site":
-            return self.build_url(self.DELETE_SITE_URL.format(domain=self.domain))
+            return self.build_url(self._DELETE_SITE_URL.format(domain=self.domain))
         elif task == "create-site-goal":
-            return self.build_url(self.CREATE_SITE_GOAL_URL)
+            return self.build_url(self._CREATE_SITE_GOAL_URL)
         elif task == "delete-site-goal":
             return self.build_url(
-                self.DELETE_SITE_GOAL_URL.format(goal_id=self.goal_id)
+                self._DELETE_SITE_GOAL_URL.format(goal_id=self.goal_id)
             )
         elif task == "create-site-shared-link":
-            return self.build_url(self.CREATE_SITE_SHARED_LINK_URL)
+            return self.build_url(self._CREATE_SITE_SHARED_LINK_URL)
         elif task == "send-event":
-            return self.build_url(self.SEND_EVENT_URL)
+            return self.build_url(self._SEND_EVENT_URL)
         elif task == "realtime-visitors":
-            return self.build_url(self.REALTIME_VISITOR_URL.format(domain=self.domain))
+            return self.build_url(self._REALTIME_VISITOR_URL.format(domain=self.domain))
 
     def create_site(self, domain: str, time_zone: str) -> Dict[Any, Any]:
         """This is a method for creating site application at Plausible Admin
