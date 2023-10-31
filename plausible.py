@@ -57,6 +57,15 @@ class PlausibleAPI(object):
         return required_url
 
     def get_url(self, task: str) -> str:
+        """This is a method for generate desired URL for performing requests to specific endpoint with full hostname + endpoints
+
+        :param str task: desired task of PlausibleAPI which need to be performed by the API wrapper
+
+        :returns: desired URL of PlausibleAPI endpoint
+
+        :rtype: str
+        """
+
         if task == "create-site":
             return self.build_url(self.CREATE_SITE_URL)
         elif task == "retrieve-site":
@@ -79,6 +88,16 @@ class PlausibleAPI(object):
             return self.build_url(self.REALTIME_VISITOR_URL.format(domain=self.domain))
 
     def create_site(self, domain: str, time_zone: str) -> Dict[Any, Any]:
+        """This is a method for creating site application at Plausible Admin
+
+        :param str domain: domain name that will be tracked by Plausible (e.g. jago.com)
+        :param str time_zone: timezone of the website location (e.g. Asia/Jakarta)
+
+        :returns: Create site response payload
+
+        :rtype: Dict[Any, Any]Dict[Any, Any]
+        """
+
         result = self.result
 
         payload = {"domain": domain, "timezone": time_zone}
@@ -105,6 +124,15 @@ class PlausibleAPI(object):
         return result
 
     def retrieve_site(self, domain: str) -> Dict[Any, Any]:
+        """This is a method for retrieving site application at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+
+        :returns: Retrieve site response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         self.domain = domain
         retrieve_site_url = self.get_url("retrieve-site")
 
@@ -125,6 +153,16 @@ class PlausibleAPI(object):
         return result
 
     def update_site(self, domain: str, new_domain: str) -> Dict[Any, Any]:
+        """This is a method for updating site application at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+        :param str new_domain: new domain name that will update your existing site at Plausible
+
+        :returns: Update site response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         self.domain = domain
         update_site_url = self.get_url("update-site")
 
@@ -152,6 +190,15 @@ class PlausibleAPI(object):
         return result
 
     def delete_site(self, domain: str) -> Dict[Any, Any]:
+        """This is a method for deleting site application at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+
+        :returns: Delet site response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         self.domain = domain
         delete_site_url = self.get_url("delete-site")
 
@@ -177,6 +224,18 @@ class PlausibleAPI(object):
     def create_site_goal(
         self, domain: str, goal_type: str, event_name: str = "", page_path: str = ""
     ) -> Dict[Any, Any]:
+        """This is a method for creating site goal at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+        :param str goal_type: goal type for your site. You could choose `event` or `page_path`
+        :param str event_name: if you choose `event` goal type, you have to specify the event name (optional)
+        :param str page_path: if you choose `page_path` goal type, you have to specify the path of your site that will be measured by Plausible (optional)
+
+        :returns: Create site goal response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         result = self.result
 
         if goal_type == "event":
@@ -214,6 +273,16 @@ class PlausibleAPI(object):
         return result
 
     def delete_site_goal(self, goal_id: int, domain: str) -> Dict[Any, Any]:
+        """This is a method for deleting site goal at Plausible Admin
+
+        :param int goal_id: the ID of your goal site
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+
+        :returns: Delete site goal response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         self.goal_id = goal_id
         delete_site_goal_url = self.get_url("delete-site-goal")
 
@@ -242,6 +311,16 @@ class PlausibleAPI(object):
         return result
 
     def create_site_shared_link(self, domain: str, name: str) -> Dict[Any, Any]:
+        """This is a method for creating site shared link at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+        :param int goal_id: the name of shared link for your site
+
+        :returns: Creating site shared link response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         result = self.result
 
         payload = {
@@ -281,6 +360,22 @@ class PlausibleAPI(object):
         currency: str = "",
         amount: str = "",
     ) -> Dict[Any, Any]:
+        """This is a method for sending event related to your site at Plausible Admin
+
+        :param str user_agent: web browser agent name
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+        :param str name: event name that you want to send
+        :param str url: URL when the event emitted
+        :param str x_forwarded_for: used to explicitly set the IP address of the client (optional)
+        :param Dict[str, str] props: custom properties for the event (optional)
+        :param str currency: currency that the event carry (optional, e.g. USD, IDR, JPY, etc.)
+        :param str amount: the nominal of transaction amount (optional, e.g. USD, IDR, JPY, etc.)
+
+        :returns: Send event response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         result = self.result
 
         self.headers["User-Agent"] = user_agent
@@ -317,6 +412,15 @@ class PlausibleAPI(object):
         return result
 
     def get_realtime_visitors(self, domain: str) -> Dict[Any, Any]:
+        """This is a method for retrieving realtime visitors of your site at Plausible Admin
+
+        :param str domain: domain name of your site at Plausible (e.g. jago.com)
+
+        :returns: Get realtime visitors response payload
+
+        :rtype: Dict[Any, Any]
+        """
+
         self.domain = domain
         realtime_visitors_url = self.get_url("realtime-visitors")
 

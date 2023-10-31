@@ -10,10 +10,10 @@ plausible_api = PlausibleAPI(
     token=PLAUSIBLE_TOKEN,
 )
 
-result = plausible_api.retrieve_site(domain="tokopedia.com")
+result = plausible_api.retrieve_site(domain="jago.com")
 print(result)
 
 result = plausible_api.create_site_shared_link(
-    domain="tokopedia.com", name="Tokopedia Homepage"
+    domain="jago.com", name="Bank Jago Homepage"
 )
 print(result)

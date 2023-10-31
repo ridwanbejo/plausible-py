@@ -10,11 +10,11 @@ plausible_api = PlausibleAPI(
     token=PLAUSIBLE_TOKEN,
 )
 
-result = plausible_api.retrieve_site(domain="tokopedia.com")
+result = plausible_api.retrieve_site(domain="jago.com")
 print(result)
 
-result = plausible_api.delete_site_goal(goal_id=8, domain="tokopedia.com")
+result = plausible_api.delete_site_goal(goal_id=8, domain="jago.com")
 print(result)
 
-result = plausible_api.delete_site_goal(goal_id=9, domain="tokopedia.com")
+result = plausible_api.delete_site_goal(goal_id=9, domain="jago.com")
 print(result)
