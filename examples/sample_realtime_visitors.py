@@ -10,8 +10,8 @@ plausible_api = PlausibleAPI(
     token=PLAUSIBLE_TOKEN,
 )
 
-result = plausible_api.retrieve_site(domain="tokopedia.com")
+result = plausible_api.retrieve_site(domain="jago.com")
 print(result)
 
-result = plausible_api.get_realtime_visitors(domain="tokopedia.com")
+result = plausible_api.get_realtime_visitors(domain="jago.com")
 print(result)
