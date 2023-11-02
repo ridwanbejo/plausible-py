@@ -6,20 +6,30 @@
 Welcome to plausible-py docs's documentation!
 =============================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Plausible-py is an API wrapper for managing resources at Plausible. You can call some HTTP API provided by Plausible through this library.
 
-   modules
-
-Getting Started
----------------
-
-To use this module, you'll need the following:
+To use this module, you'll need following requirements:
 
 * Python installed.
 * PIP installed.
 
+Useful links
+============
+
+- `Plausible API Documentation <https://plausible.io/docs/sites-api>`_
+- `Github repo <https://github.com/ridwanbejo/plausible-py>`_
+- `Issue tracker <https://github.com/ridwanbejo/plausible-py/issues>`_
+
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
+
+   getting-started
+   how-to-guide
+   modules
+   genindex
+   search
 
 Indices and tables
 ==================
