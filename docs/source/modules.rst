@@ -1,4 +1,4 @@
-plausible-py
+API Modules
 ============
 
 .. toctree::

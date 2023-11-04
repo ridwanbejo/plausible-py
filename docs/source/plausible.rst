@@ -1,4 +1,4 @@
-plausible module
+Plausible
 ================
 
 .. automodule:: plausible
